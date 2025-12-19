@@ -1,11 +1,8 @@
 import { NextRequest } from "next/server";
 import { loremIpsum } from "lorem-ipsum";
+import { clampInt } from "@/lib/utils";
 
 export const runtime = "edge";
-
-function clampInt(v: number, min: number, max: number) {
-  return Math.min(Math.max(v, min), max);
-}
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -16,7 +13,15 @@ export async function GET(req: NextRequest) {
     | "sentences"
     | "paragraphs";
 
-  const count = clampInt(Number(searchParams.get("count") ?? "1"), 1, 2000);
+  const max = 10;
+  const min = 1;
+  const randCount = Math.floor(Math.random() * (max - min + 1)) + min;
+
+  const count = clampInt(
+    Number(searchParams.get("count") ?? randCount),
+    1,
+    2000,
+  );
   const format = (searchParams.get("format") ?? "plain") as "plain" | "html";
 
   const text = loremIpsum({
