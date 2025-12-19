@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { siteConfig } from "@/lib/config";
+import { MainNavItem, siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 // import { Icons } from "@/components/icons" // Assuming I might need this later, but for now generic icons or Lucide
 
-export function MainNav({ items }: { items?: any[] }) {
+export function MainNav({ items }: { items?: MainNavItem[] }) {
   const pathname = usePathname();
 
   return (

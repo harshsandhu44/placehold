@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-import { docsConfig } from "@/lib/config"
+import { docsConfig, NavItem, SidebarNavItem } from "@/lib/config"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 
@@ -44,21 +44,11 @@ export function DocsPager({ slug }: DocsPagerProps) {
 
 export function getPagerForDoc(slug: string) {
   const flattenedLinks = [null, ...flatten(docsConfig.sidebarNav), null]
-  // Adjust slug matching logic as needed, assuming slug might be full path or segment
-  // For now, let's assume slug is the relative path from /docs/
-  // But wait, the hrefs in config are absolute paths like /docs/api/images
-  // So we should match against the full href.
   
-  // If slug comes in as "docs/api/images", we might need to match "/docs/api/images"
   const activeIndex = flattenedLinks.findIndex(
-    (link) => link && link.href === slug || link?.href === `/${slug}` || link?.href === `/docs/${slug}`
+    (link) => link && (link.href === slug || link.href === `/${slug}` || link.href === `/docs/${slug}`)
   )
   
-  // If exact match fails, try strictly matching href
-  const strictIndex = flattenedLinks.findIndex((link) => link && link.href === slug)
-  
-  const index = strictIndex !== -1 ? strictIndex : activeIndex
-
   const prev = activeIndex !== -1 ? flattenedLinks[activeIndex - 1] : null
   const next = activeIndex !== -1 ? flattenedLinks[activeIndex + 1] : null
   return {
@@ -67,10 +57,10 @@ export function getPagerForDoc(slug: string) {
   }
 }
 
-export function flatten(links: any[]) {
+export function flatten(links: SidebarNavItem[]): NavItem[] {
   return links
-    .reduce((flat, link) => {
-      return flat.concat(link.items ? flatten(link.items) : link)
+    .reduce<NavItem[]>((flat, link) => {
+      return flat.concat(link.items ? flatten(link.items as SidebarNavItem[]) : (link as NavItem))
     }, [])
     .filter((link) => !link?.disabled)
 }
