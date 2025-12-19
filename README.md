@@ -27,7 +27,7 @@ This project uses [Bun](https://bun.sh) as the package manager.
 
 ```bash
 git clone https://github.com/harshsandhu/placehold.git
-cd placehold.harshsandhu.com
+cd placehold
 bun install
 ```
 
