@@ -1,7 +1,6 @@
-"use strict"
-
-import { ChevronRight } from "lucide-react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import Image from "next/image";
+import { ChevronRight } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Table,
   TableBody,
@@ -9,8 +8,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { DocsPager } from "@/components/pager"
+} from "@/components/ui/table";
+import { DocsPager } from "@/components/pager";
 
 export default function ImagesApiPage() {
   return (
@@ -59,12 +58,16 @@ export default function ImagesApiPage() {
                   <TableRow>
                     <TableCell className="font-mono">w</TableCell>
                     <TableCell className="font-mono">600</TableCell>
-                    <TableCell>Width of the image in pixels (16 to 2000).</TableCell>
+                    <TableCell>
+                      Width of the image in pixels (16 to 2000).
+                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-mono">h</TableCell>
                     <TableCell className="font-mono">400</TableCell>
-                    <TableCell>Height of the image in pixels (16 to 2000).</TableCell>
+                    <TableCell>
+                      Height of the image in pixels (16 to 2000).
+                    </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell className="font-mono">bg</TableCell>
@@ -107,10 +110,11 @@ export default function ImagesApiPage() {
               </TabsContent>
               <TabsContent value="preview" className="mt-4">
                 <div className="flex justify-center rounded-lg border bg-muted/50 p-4">
-                  <img 
-                    src="/api/img?w=400&h=200&bg=000&fg=fff" 
-                    alt="Preview" 
-                    className="max-w-full rounded shadow-sm"
+                  <Image
+                    src="/api/img?w=400&h=200&bg=000&fg=fff"
+                    width={400}
+                    height={200}
+                    alt="Preview"
                   />
                 </div>
               </TabsContent>
@@ -118,7 +122,7 @@ export default function ImagesApiPage() {
           </section>
         </div>
         <div className="pt-8">
-            <DocsPager slug="/docs/api/images" />
+          <DocsPager slug="/docs/api/images" />
         </div>
       </div>
       <div className="hidden text-sm xl:block">
@@ -127,18 +131,33 @@ export default function ImagesApiPage() {
             <p className="font-medium">On this page</p>
             <ul className="m-0 list-none">
               <li className="mt-0 pt-2">
-                <a href="#endpoint" className="text-muted-foreground hover:text-foreground">Endpoint</a>
+                <a
+                  href="#endpoint"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Endpoint
+                </a>
               </li>
               <li className="mt-0 pt-2">
-                <a href="#parameters" className="text-muted-foreground hover:text-foreground">Parameters</a>
+                <a
+                  href="#parameters"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Parameters
+                </a>
               </li>
               <li className="mt-0 pt-2">
-                <a href="#examples" className="text-muted-foreground hover:text-foreground">Examples</a>
+                <a
+                  href="#examples"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Examples
+                </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
     </main>
-  )
+  );
 }
