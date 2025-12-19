@@ -21,6 +21,7 @@ export type SidebarNavItem = {
   disabled?: boolean
   external?: boolean
   icon?: string
+  label?: string
 } & (
   | {
       href: string
